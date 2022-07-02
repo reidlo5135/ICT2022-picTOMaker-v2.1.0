@@ -1,4 +1,5 @@
 ./node_modules
 client/node_modules
+/client/src/component/oauth2/env.js
 .idea/**
 

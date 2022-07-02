@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+/src/component/oauth2/env.js
+
 # testing
 /coverage
 
