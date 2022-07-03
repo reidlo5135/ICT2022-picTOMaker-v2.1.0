@@ -1,9 +1,9 @@
 # **픽토메이커(22_HF168)**
-2022년 한이음 ICT 멘토링 프로젝트<br><br>
-2022-03-02 ~ 2022-11-30<br><br>
-멘토: 오은석<br>
-멘티: 진승범, 강준모, 김동호, 서동근<br>
-<b>VERSION: 2.0.0</b>
+2022년 한이음 ICT 멘토링 프로젝트<b>(Node-Express.js version)</b><br><br>
+2022-06-31 ~ <br>
+구성원: 진승범, 강준모, 김동호<br>
+<b>VERSION: 2.0.0</b><br>
+<b><a href="https://github.com/reidlo5135/ICT2022-picTOMaker-v1.1.0">Origin Spring Boot Version(v1.1.0)</a></b>
 
 ## **픽토메이커란?**
 <b>픽토그램(pictogram)</b>이란 그림문자 또는 픽토는 의미하고자 하는 바를 직접적으로 묘사한 그림을 통해 의미를 전달하는 표의 문자입니다. <br><br>
