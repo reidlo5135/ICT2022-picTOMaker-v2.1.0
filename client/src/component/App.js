@@ -1,6 +1,4 @@
-import React, {useEffect} from 'react';
-import {AnimatePresence} from "framer-motion";
-import axios from "axios";
+import React from 'react';
 import '../App.css';
 import {Route, Switch} from 'react-router-dom';
 import Main from "./Main";
@@ -14,16 +12,9 @@ import Callback from "./oauth2/callback";
 import MyPageContent from "./myPage/MyPage";
 import PoseWebStudio from "./studio/poseweb/PoseWebStudio"
 import EditTool from './studio/edittool/EditTool';
+import {AnimatePresence} from "framer-motion";
 
 export default function App(){
-    const callApi = async () => {
-        axios.get('/v1/api/test').then((res) => console.log(res.data.test));
-    }
-
-    useEffect(() => {
-        callApi();
-    }, []);
-
     return (
         <div className='App'>
             <AnimatePresence>
