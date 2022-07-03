@@ -17,18 +17,15 @@ const Profile = () => {
         try {
             await axios.post(`/oauth2/profile/${provider}`, {
                 access_token
-            },{
-                baseURL: 'http://localhost:8080',
-                withCredentials: true
             }).then((response) => {
-                console.log('OAuth profile res data.data : ', response.data.data);
-                console.log('OAuth get profile email : ', response.data.data.email);
-                console.log('OAuth get profile nickname : ', response.data.data.nickname);
-                console.log('OAuth get profile profile_image_url : ', response.data.data.profile_image_url);
+                console.log('OAuth profile res data.data : ', response.data);
+                console.log('OAuth get profile email : ', response.data.email);
+                console.log('OAuth get profile nickname : ', response.data.nickname);
+                console.log('OAuth get profile profile_image_url : ', response.data.profile_image_url);
 
-                setEmail(response.data.data.email);
-                setNickName(response.data.data.nickname);
-                setProfileImage(response.data.data.profile_image_url);
+                setEmail(response.data.email);
+                setNickName(response.data.nickname);
+                setProfileImage(response.data.profile_image_url);
 
                 localStorage.setItem("profile", JSON.stringify(response.data.data));
             });
