@@ -13,9 +13,9 @@ const Profile = () => {
     const [nickName, setNickName] = useState();
     const [profileImage, setProfileImage] = useState();
 
-    const getOAuthProf = async () => {
+    const getOAuthProf = () => {
         try {
-            await axios.post(`/v1/api/oauth2/profile/${provider}`, {
+            axios.post(`/v1/api/oauth2/profile/${provider}`, {
                 access_token
             }).then((response) => {
                 console.log('OAuth profile res data.data : ', response.data);
@@ -27,7 +27,7 @@ const Profile = () => {
                 setNickName(response.data.nickname);
                 setProfileImage(response.data.profile_image_url);
 
-                localStorage.setItem("profile", JSON.stringify(response.data.data));
+                localStorage.setItem("profile", JSON.stringify(response.data));
             });
         } catch (err) {
             console.error(err);
@@ -36,25 +36,22 @@ const Profile = () => {
 
     const getLocalProf = async () => {
         try {
-            await axios.post('/v1/user/profile', {
+            await axios.post('/v1/api/user/profile', {
                 access_token
-            },{
-                baseURL: 'http://localhost:8080',
-                withCredentials: true
             }).then((response) => {
-                console.log('Local profile res data.data : ', response.data.data);
-                console.log('Local get profile email : ', response.data.data.email);
-                console.log('Local get profile nickname : ', response.data.data.nickname);
-                console.log('Local get profile profile_image_url : ', response.data.data.profile_image_url);
+                console.log('Local profile res data.data : ', response.data);
+                console.log('Local get profile email : ', response.data.email);
+                console.log('Local get profile nickname : ', response.data.nickname);
+                console.log('Local get profile profile_image_url : ', response.data.profile_image_url);
 
-                setEmail(response.data.data.email);
-                setNickName(response.data.data.nickname);
+                setEmail(response.data.email);
+                setNickName(response.data.nickname);
 
-                if(response.data.data.profile_image_url === null){
+                if(response.data.profile_image_url === null){
                     setProfileImage(null);
                 }
 
-                localStorage.setItem("profile", JSON.stringify(response.data.data));
+                localStorage.setItem("profile", JSON.stringify(response.data));
             });
         } catch (err) {
             console.error(err);
