@@ -5,7 +5,7 @@ const KAKAO_REDIRECT_URI = "http://localhost:8080/oauth2/redirect/kakao";
 
 const generateToken = async (req, res, next) => {
     const code = req.body.code;
-    console.log('OAuthController oauth2 code : ', code);
+    console.log('OAuthController generateToken code : ', code);
     try {
         axios.post(`${KAKAO_TOKEN_URL}?grant_type=authorization_code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&code=${code}`, {
             headers: {
@@ -14,8 +14,8 @@ const generateToken = async (req, res, next) => {
         }).then((result) => {
             const access_token = result.data['access_token'];
             const refresh_token = result.data['refresh_token'];
-            console.log('OAuthController access_token : ', access_token);
-            console.log('OAuthController refresh_token : ', refresh_token);
+            console.log('OAuthController generateToken access_token : ', access_token);
+            console.log('OAuthController generateToken refresh_token : ', refresh_token);
             res.send({'code': 0,'message':'success','access_token':access_token, 'refresh_token':refresh_token});
         }).catch(e => {
             console.error(e);
@@ -27,6 +27,32 @@ const generateToken = async (req, res, next) => {
     }
 };
 
+const extractProfile = async (req, res, next) => {
+    const access_token = req.body.access_token;
+    console.log('OAuthController extractProfile access_token : ', access_token);
+    try {
+        axios.post(`https://kapi.kakao.com/v2/user/me`, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Authorization': 'Bearer' + access_token
+            }
+        }).then((result) => {
+            const profile_image_url = result.data['profile_image_url'];
+            const email = result.data['email'];
+            const nickname = result.data['nickname'];
+            console.log('OAuthController extractProfile : ', result.data);
+            res.send({'code':0,'message': 'success', 'profile_image_url':profile_image_url,'email':email,'nickname':nickname});
+        }).catch(e => {
+            console.error(e);
+            res.send(e);
+        });
+    } catch (e) {
+        console.error(e);
+        res.send(e);
+    }
+};
+
 module.exports = {
-    generateToken: generateToken
+    generateToken: generateToken,
+    extractProfile: extractProfile
 }
