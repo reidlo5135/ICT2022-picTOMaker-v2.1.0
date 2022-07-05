@@ -1,4 +1,5 @@
 const axios = require("axios");
+const models = require("../../models");
 const KAKAO_CLIENT_ID = "42c51ed9e78ced900811f39d27801209";
 const KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 const KAKAO_REDIRECT_URI = "http://localhost:8080/oauth2/redirect/kakao";
@@ -11,13 +12,24 @@ const generateToken = async (req, res, next) => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             }
-        }).then((result) => {
+        }).then(async (result) => {
             const access_token = result.data['access_token'];
             const refresh_token = result.data['refresh_token'];
+
+            const bat = {
+                access_token : access_token,
+                expires_in : 21599,
+                provider : 'KAKAO',
+                refresh_token : refresh_token,
+                refresh_token_expires_in : 'bearer',
+                createdAt : new Date(),
+                updatedAt : new Date()
+            }
 
             console.log('OAuthController generateToken access_token : ', access_token);
             console.log('OAuthController generateToken refresh_token : ', refresh_token);
 
+            const token = await models.BaseAccessToken.create(bat);
             res.send({'code': 0,'message':'success','access_token':access_token, 'refresh_token':refresh_token});
         }).catch(e => {
             console.error(e);
