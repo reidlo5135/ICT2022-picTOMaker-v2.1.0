@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const {sequelize} = require('./models');
 
 const port = 5000;
 
@@ -21,6 +22,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
+
+sequelize.sync({force:false})
+    .then(() => {
+      console.log('SEQ DB CONNECTED');
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 
 app.use('/', OAuthRouter);
 
