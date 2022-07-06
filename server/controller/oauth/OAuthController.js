@@ -1,35 +1,30 @@
 const axios = require("axios");
-const models = require("../../models");
+const svc = require('../../service/oauth/OAuthService');
 const KAKAO_CLIENT_ID = "42c51ed9e78ced900811f39d27801209";
 const KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 const KAKAO_REDIRECT_URI = "http://localhost:8080/oauth2/redirect/kakao";
 
 const generateToken = async (req, res, next) => {
     const code = req.body.code;
+    const provider = req.params.provider;
     console.log('OAuthController generateToken code : ', code);
+    console.log('OAuthController generateToken provider : ', provider);
     try {
         axios.post(`${KAKAO_TOKEN_URL}?grant_type=authorization_code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&code=${code}`, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             }
-        }).then(async (result) => {
+        }).then((result) => {
             const access_token = result.data['access_token'];
             const refresh_token = result.data['refresh_token'];
-
-            const bat = {
-                access_token : access_token,
-                expires_in : 21599,
-                provider : 'KAKAO',
-                refresh_token : refresh_token,
-                refresh_token_expires_in : 'bearer',
-                createdAt : new Date(),
-                updatedAt : new Date()
-            }
-
             console.log('OAuthController generateToken access_token : ', access_token);
             console.log('OAuthController generateToken refresh_token : ', refresh_token);
 
-            const token = await models.BaseAccessToken.create(bat);
+            const bat = {
+                access_token,
+                refresh_token
+            };
+            svc.generateToken(bat);
             res.send({'code': 0,'message':'success','access_token':access_token, 'refresh_token':refresh_token});
         }).catch(e => {
             console.error(e);
@@ -43,7 +38,9 @@ const generateToken = async (req, res, next) => {
 
 const extractProfile = async (req, res, next) => {
     const access_token = req.body.access_token;
+    const provider = req.params.provider;
     console.log('OAuthController extractProfile access_token : ', access_token);
+    console.log('OAuthController extractProfile provider : ', provider);
     try {
         axios.get('https://kapi.kakao.com/v2/user/me', {
             headers: {
@@ -60,6 +57,12 @@ const extractProfile = async (req, res, next) => {
             console.log('OAuthController extractProfile result.data : ', result.data);
             console.log('OAuthController extractProfile profile : ', profile);
 
+            const bau = {
+                email,
+                name: nickname,
+                picture: profile_image_url
+            }
+            svc.registerProfile(bau);
             res.send({'code':0,'message': 'success', 'profile_image_url':profile_image_url,'email':email,'nickname':nickname});
         }).catch(e => {
             console.error(e);
