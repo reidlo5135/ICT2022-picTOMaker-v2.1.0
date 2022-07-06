@@ -31,8 +31,8 @@
 
 - Design - Figma, Adobe PhotoShop, Adobe XD
 - Frontend - React.js, HTML5, CSS3, JavaScript, MediaPipe, TensorFlow
-- Backend - Express.js, Node.js, NodeMon, Npm, JavaScript, REST API
-- Database - MySQL, AWS RDS
+- Backend - Node.js, Express.js, NodeMon, Npm, concurrently, Sequelize(cli, mysql2), JavaScript, REST API
+- Database - MySQL, AWS RDS, AWS S3
 - IDE - IntelliJ IDEA, Visual Studio Code
 
 ## <b>주요기능</b>

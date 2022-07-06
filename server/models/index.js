@@ -24,5 +24,6 @@ const sequelize = new Sequelize(dbConfig.DATABASE, dbConfig.USER, dbConfig.PASSW
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.BaseAccessToken = require('./BaseAccessToken')(sequelize, Sequelize);
+db.BaseAuthUser = require('./BaseAuthUser')(sequelize, Sequelize);
 
 module.exports = db;
