@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const BaseAccessToken = sequelize.define("base_access_token", {
+    const BaseAccessToken = sequelize.define('base_access_token', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -29,6 +29,14 @@ module.exports = (sequelize, DataTypes) => {
         token_type: {
             type: DataTypes.STRING,
             defaultValue: 'bearer'
+        },
+        createdAt: {
+            type:DataTypes.DATEONLY,
+            defaultValue: new Date()
+        },
+        updatedAt: {
+            type:DataTypes.DATEONLY,
+            defaultValue: new Date()
         }
     });
 
