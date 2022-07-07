@@ -1,16 +1,22 @@
 const axios = require("axios");
+const env = require('../../config/OAuthConfig');
 const svc = require('../../service/oauth/OAuthService');
-const KAKAO_CLIENT_ID = "42c51ed9e78ced900811f39d27801209";
-const KAKAO_TOKEN_URL = "https://kauth.kakao.com/oauth/token";
-const KAKAO_REDIRECT_URI = "http://localhost:8080/oauth2/redirect/kakao";
 
 const generateToken = async (req, res, next) => {
     const code = req.body.code;
     const provider = req.params.provider;
     console.log('OAuthController generateToken code : ', code);
     console.log('OAuthController generateToken provider : ', provider);
+    let url;
+    if(provider !== null) {
+        if(provider === 'kakao') {
+            url = env.KAKAO.KAKAO_TOKEN_URL + `${code}`;
+        } else if(provider === 'naver') {
+            url = env.NAVER.NAVER_TOKEN_URL + `${code}`;
+        }
+    }
     try {
-        axios.post(`${KAKAO_TOKEN_URL}?grant_type=authorization_code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&code=${code}`, {
+        axios.post(url, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             }
