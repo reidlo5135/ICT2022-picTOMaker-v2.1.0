@@ -3,4 +3,5 @@ client/node_modules
 client/src/component/oauth2/env.js
 server/src/config/DBConfig.ts
 server/src/config/OAuthConfig.ts
+server/src/migration/create-db.ts
 .idea/**
