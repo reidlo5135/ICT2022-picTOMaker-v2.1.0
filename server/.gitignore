@@ -2,5 +2,6 @@
 client/node_modules
 /client/src/component/oauth2/env.js
 config/DBConfig.js
+config/OAuthConfig.js
 .idea/**
 
