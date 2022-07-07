@@ -3,7 +3,7 @@ const BaseAccessToken = models.BaseAccessToken;
 const BaseAuthUser = models.BaseAuthUser;
 const Op = models.Sequelize.Op;
 
-const generateToken = async (params) => {
+const generateToken = async (params:any) => {
     console.log('OAuth SVC generateToken params : ', params);
     const bat = {
         access_token : params.access_token,
@@ -19,13 +19,13 @@ const generateToken = async (params) => {
             access_token: bat.access_token
         },
         defaults: bat
-    }).catch(err => {
+    }).catch((err:Error) => {
         console.error(err);
     });
     console.log('OAuth SVC bat model : ', model, ', created : ', created);
 }
 
-const registerProfile = async (params) => {
+const registerProfile = async (params:any) => {
     console.log('OAuth SVC registerProfile params : ', params);
     const bau = {
         email: params.email,
@@ -39,13 +39,13 @@ const registerProfile = async (params) => {
             email: bau.email
         },
         defaults: bau
-    }).catch(err => {
+    }).catch((err:Error) => {
         console.error(err);
     });
     console.log('OAuth SVC bau model : ', model, ', created : ', created);
 }
 
-module.exports = {
+export = {
     generateToken: generateToken,
     registerProfile: registerProfile
 }
