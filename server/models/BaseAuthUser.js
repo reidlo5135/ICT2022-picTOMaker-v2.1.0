@@ -1,34 +1,33 @@
 module.exports = (sequelize, DataTypes) => {
-    const BaseAccessToken = sequelize.define('base_access_token', {
+    const BaseAuthUser = sequelize.define('base_auth_user', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        access_token : {
-            type: DataTypes.STRING(255),
-            allowNull: false
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
         },
-        expires_in : {
-            type: DataTypes.INTEGER,
-            defaultValue: 21599
-        },
-        provider : {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        refresh_token : {
+        picture: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        refresh_token_expires_in : {
-            type: DataTypes.INTEGER,
+        provider: {
+            type: DataTypes.STRING,
             allowNull: false
         },
-        token_type: {
-            type: DataTypes.STRING,
-            defaultValue: 'bearer'
+        role: {
+            type: DataTypes.ENUM('KAKAO', '카카오 사용자'),
+            allowNull: false
         },
         createdAt: {
             type:DataTypes.DATEONLY,
@@ -40,5 +39,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    return BaseAccessToken;
+    return BaseAuthUser;
 }
