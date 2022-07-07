@@ -7,11 +7,11 @@ const generateToken = async (params) => {
     console.log('OAuth SVC generateToken params : ', params);
     const bat = {
         access_token : params.access_token,
-        expires_in : 21599,
-        provider : 'KAKAO',
+        expires_in : params.expires_in,
+        provider : params.provider.toUpperCase(),
         refresh_token : params.refresh_token,
         refresh_token_expires_in : 21599,
-        token_type: 'bearer'
+        token_type: params.token_type
     }
 
     const [model, created] = await BaseAccessToken.findOrCreate({
@@ -31,8 +31,8 @@ const registerProfile = async (params) => {
         email: params.email,
         name: params.name,
         picture: params.picture,
-        provider: 'kakao',
-        role: 'KAKAO'
+        provider: params.provider,
+        role: params.provider.toUpperCase()
     }
     const [model, created] = await BaseAuthUser.findOrCreate({
         where: {

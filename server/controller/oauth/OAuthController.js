@@ -23,12 +23,20 @@ const generateToken = async (req, res, next) => {
         }).then((result) => {
             const access_token = result.data['access_token'];
             const refresh_token = result.data['refresh_token'];
+            const token_type = result.data['token_type'];
+            const expires_in = result.data['expires_in'];
+
             console.log('OAuthController generateToken access_token : ', access_token);
             console.log('OAuthController generateToken refresh_token : ', refresh_token);
+            console.log('OAuthController generateToken token_type : ', token_type);
+            console.log('OAuthController generateToken expires_in : ', expires_in);
 
             const bat = {
                 access_token,
-                refresh_token
+                refresh_token,
+                token_type,
+                expires_in,
+                provider
             };
             svc.generateToken(bat);
             res.send({'code': 0,'message':'success','access_token':access_token, 'refresh_token':refresh_token});
@@ -47,26 +55,45 @@ const extractProfile = async (req, res, next) => {
     const provider = req.params.provider;
     console.log('OAuthController extractProfile access_token : ', access_token);
     console.log('OAuthController extractProfile provider : ', provider);
+    let url;
+    if(provider !== null) {
+        if(provider === 'kakao') {
+            url = env.KAKAO.KAKAO_PROFILE_URL;
+        } else if(provider === 'naver') {
+            url = env.NAVER.NAVER_PROFILE_URL;
+        }
+    }
     try {
-        axios.get('https://kapi.kakao.com/v2/user/me', {
+        axios.get(url, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'Authorization': 'Bearer ' + access_token
             }
         }).then((result) => {
-            const profile = result.data['properties'];
-            const profile_image_url = profile.profile_image;
-            const nickname = profile.nickname;
-            const account_info = result.data['kakao_account'];
-            const email = account_info.email;
-
             console.log('OAuthController extractProfile result.data : ', result.data);
-            console.log('OAuthController extractProfile profile : ', profile);
-
+            var profile;
+            var profile_image_url;
+            var nickname;
+            var email;
+            if(provider === 'kakao') {
+                profile = result.data['properties'];
+                console.log('OAuthController extractProfile ', provider, ' profile : ', profile);
+                profile_image_url = profile.profile_image;
+                nickname = profile.nickname;
+                const account_info = result.data['kakao_account'];
+                email = account_info.email;
+            } else if(provider === 'naver') {
+                profile = result.data['response'];
+                console.log('OAuthController extractProfile ', provider, ' profile : ', profile);
+                profile_image_url = profile.profile_image;
+                nickname = profile.name;
+                email = profile.email;
+            }
             const bau = {
                 email,
                 name: nickname,
-                picture: profile_image_url
+                picture: profile_image_url,
+                provider
             }
             svc.registerProfile(bau);
             res.send({'code':0,'message': 'success', 'profile_image_url':profile_image_url,'email':email,'nickname':nickname});
