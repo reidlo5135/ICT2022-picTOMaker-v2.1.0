@@ -1,8 +1,10 @@
+import {Request, Response, NextFunction} from "express";
+import {AxiosError, AxiosResponse} from "axios";
 const axios = require("axios");
 const env = require('../../config/OAuthConfig');
 const svc = require('../../service/oauth/OAuthService');
 
-const generateToken = async (req, res, next) => {
+const generateToken = async (req:Request, res:Response, next:NextFunction) => {
     const code = req.body.code;
     const provider = req.params.provider;
     console.log('OAuthController generateToken code : ', code);
@@ -20,7 +22,7 @@ const generateToken = async (req, res, next) => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             }
-        }).then((result) => {
+        }).then((result:AxiosResponse) => {
             const access_token = result.data['access_token'];
             const refresh_token = result.data['refresh_token'];
             const token_type = result.data['token_type'];
@@ -40,7 +42,7 @@ const generateToken = async (req, res, next) => {
             };
             svc.generateToken(bat);
             res.send({'code': 0,'message':'success','access_token':access_token, 'refresh_token':refresh_token});
-        }).catch(e => {
+        }).catch((e:AxiosError) => {
             console.error(e);
             res.send(e);
         })
@@ -50,7 +52,7 @@ const generateToken = async (req, res, next) => {
     }
 };
 
-const extractProfile = async (req, res, next) => {
+const extractProfile = async (req:Request, res:Response, next:NextFunction) => {
     const access_token = req.body.access_token;
     const provider = req.params.provider;
     console.log('OAuthController extractProfile access_token : ', access_token);
@@ -69,7 +71,7 @@ const extractProfile = async (req, res, next) => {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'Authorization': 'Bearer ' + access_token
             }
-        }).then((result) => {
+        }).then((result:AxiosResponse) => {
             console.log('OAuthController extractProfile result.data : ', result.data);
             var profile;
             var profile_image_url;
@@ -97,7 +99,7 @@ const extractProfile = async (req, res, next) => {
             }
             svc.registerProfile(bau);
             res.send({'code':0,'message': 'success', 'profile_image_url':profile_image_url,'email':email,'nickname':nickname});
-        }).catch(e => {
+        }).catch((e:AxiosError) => {
             console.error(e);
             res.send(e);
         });
@@ -107,7 +109,20 @@ const extractProfile = async (req, res, next) => {
     }
 };
 
-module.exports = {
-    generateToken: generateToken,
-    extractProfile: extractProfile
+const invalidToken = async (req:Request, res:Response, next:NextFunction) => {
+    const access_token = req.params.access_token;
+    console.log('OAuthController invalidToken access_token : ', access_token);
+    try {
+        svc.invalidToken(access_token).then((result:any) => {console.log('OAuthController invalidToken result : ', JSON.stringify(result));})
+        res.send({'code':0,'message':'success'});
+    } catch (e) {
+        console.error(e);
+        res.send(e);
+    }
+};
+
+export = {
+    generateToken,
+    extractProfile,
+    invalidToken
 }

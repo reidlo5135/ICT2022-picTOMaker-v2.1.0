@@ -1,10 +1,10 @@
 # **픽토메이커(22_HF168)**
-2022년 한이음 ICT 멘토링 프로젝트<b>(Node-Express.js version)</b><br><br>
+2022년 한이음 ICT 멘토링 프로젝트<b>(Node-Express.ts version)</b><br><br>
 2022-06-31 ~ <br>
 구성원: 진승범, 강준모, 김동호<br>
-<b>VERSION: 2.0.0</b><br>
+<b>VERSION: 2.1.0</b><br>
 <b><a href="https://github.com/reidlo5135/ICT2022-picTOMaker-v1.1.0">-> Origin Spring Boot Version(v1.1.0)</a></b><br>
-<b><a href="https://github.com/reidlo5135/ICT2022-picTOMaker-v2.0.0/tree/dev-2.1.0">-> Node-Express.ts Version(v2.1.0)</a></b>
+<b><a href="https://github.com/reidlo5135/ICT2022-picTOMaker-v2.0.0">-> Origin Node-Express.js Version(v2.0.0)</a></b>
 
 ## **픽토메이커란?**
 <b>픽토그램(pictogram)</b>이란 그림문자 또는 픽토는 의미하고자 하는 바를 직접적으로 묘사한 그림을 통해 의미를 전달하는 표의 문자입니다. <br><br>
@@ -19,6 +19,8 @@
 <img src="https://img.shields.io/badge/express.js-000000?style=for-the-badge&logo=express&logoColor=white">
 <img src="https://img.shields.io/badge/NodeMon-76D04B?style=for-the-badge&logo=NodeMon&logoColor=white">
 <img src="https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=Npm&logoColor=white"><br>
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/git kraken-179287?style=for-the-badge&logo=gitkraken&logoColor=white">
@@ -32,7 +34,7 @@
 
 - Design - Figma, Adobe PhotoShop, Adobe XD
 - Frontend - React.js, HTML5, CSS3, JavaScript, MediaPipe, TensorFlow
-- Backend - Node.js, Express.js, NodeMon, Npm, concurrently, Sequelize(cli, mysql2), JavaScript, REST API
+- Backend - Node.ts, Express.ts, NodeMon, Npm, concurrently, Sequelize, TypeScript, REST API
 - Database - MySQL, AWS RDS, AWS S3
 - IDE - IntelliJ IDEA, Visual Studio Code
 

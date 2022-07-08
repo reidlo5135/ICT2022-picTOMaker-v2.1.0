@@ -1,6 +1,7 @@
 server/node_modules
 client/node_modules
 client/src/component/oauth2/env.js
-server/config/DBConfig.js
-server/config/OAuthConfig.js
+server/src/config/DBConfig.ts
+server/src/config/OAuthConfig.ts
+server/src/migration/create-db.ts
 .idea/**
