@@ -109,7 +109,20 @@ const extractProfile = async (req:Request, res:Response, next:NextFunction) => {
     }
 };
 
+const invalidToken = async (req:Request, res:Response, next:NextFunction) => {
+    const access_token = req.params.access_token;
+    console.log('OAuthController invalidToken access_token : ', access_token);
+    try {
+        svc.invalidToken(access_token).then((result:any) => {console.log('OAuthController invalidToken result : ', JSON.stringify(result));})
+        res.send({'code':0,'message':'success'});
+    } catch (e) {
+        console.error(e);
+        res.send(e);
+    }
+};
+
 export = {
-    generateToken: generateToken,
-    extractProfile: extractProfile
+    generateToken,
+    extractProfile,
+    invalidToken
 }
