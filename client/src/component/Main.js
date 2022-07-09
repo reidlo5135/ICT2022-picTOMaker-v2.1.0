@@ -58,20 +58,16 @@ export default function Main(){
             alert('아이디와 비밀번호를 입력해주세요.');
         } else {
             try {
-                axios.post('/v1/user/login', {
+                axios.post('/v1/api/user/login', {
                     email: email,
                     password: password
-                },{
-                    baseURL: 'http://localhost:8080',
-                    withCredentials: true
                 }).then((response) => {
                     console.log('res data ', response.data);
-                    console.log('res data.data ', response.data.data);
 
                     if(response.data.code === 0){
                         alert('어서오세요, ' + email + ' 픽토메이커님!');
-                        const access_token = response.data.data.access_token;
-                        const refresh_token = response.data.data.refresh_token;
+                        const access_token = response.data.access_token;
+                        const refresh_token = response.data.refresh_token;
 
                         setIsLogged(true);
                         localStorage.setItem("access_token", access_token);
