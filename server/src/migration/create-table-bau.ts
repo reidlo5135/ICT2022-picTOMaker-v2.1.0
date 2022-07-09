@@ -8,6 +8,6 @@ const create_table_bau = async () => {
         .catch((e:Error) => {
             console.error('❗Error in Create BAT Table : ', e);
         });
-}
+};
 
 create_table_bau();
