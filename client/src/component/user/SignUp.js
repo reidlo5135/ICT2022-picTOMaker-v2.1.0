@@ -48,17 +48,13 @@ export default function SignUp(){
             alert('비밀번호가 일치하지 않습니다.');
         } else {
             try {
-                axios.post('/v1/user/signUp', {
-                    email: email,
-                    name: name,
-                    nickName: nickName,
-                    password: password
-                },{
-                    baseURL: 'http://localhost:8080',
-                    withCredentials: true
+                axios.post('/v1/api/user/signUp', {
+                    email,
+                    name,
+                    nickName,
+                    password
                 }).then((response) => {
                     console.log('response : ', response.data);
-                    console.log('response : ', response.data.data);
 
                     if(response.data.code === 0){
                         alert(nickName + ' 픽토메이커님 환영합니다!');

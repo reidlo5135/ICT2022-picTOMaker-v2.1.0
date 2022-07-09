@@ -1,6 +1,6 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
+import {DataTypes, Model} from "sequelize";
 import {sequelize} from "./index";
-
+import {BaseLocalUser} from "./BaseLocalUser";
 
 interface BaseAccessTokenAttributes {
     id: bigint | null,
@@ -12,7 +12,7 @@ interface BaseAccessTokenAttributes {
     token_type: string
 }
 
-export class BaseAccessToken extends Model<BaseAccessTokenAttributes> {
+export class BaseAuthUserToken extends Model<BaseAccessTokenAttributes> {
     public readonly id! : number | null;
     public access_token! : string;
     public expires_in! : number;
@@ -24,7 +24,7 @@ export class BaseAccessToken extends Model<BaseAccessTokenAttributes> {
     public readonly updatedAt! : Date;
 }
 
-BaseAccessToken.init({
+BaseAuthUserToken.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -56,10 +56,10 @@ BaseAccessToken.init({
         defaultValue: 'bearer'
     }
 }, {
-    modelName: 'BaseAccessToken',
-    tableName: 'base_access_tokens',
+    modelName: 'BaseAuthUserToken',
+    tableName: 'base_auth_tokens',
     sequelize,
     freezeTableName: true,
     timestamps: true,
     updatedAt: 'updateTimestamp'
-}) 
+});

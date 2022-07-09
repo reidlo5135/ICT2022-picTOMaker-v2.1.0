@@ -1,11 +1,11 @@
-import {BaseAccessToken} from "../../models/BaseAccessToken";
+import {BaseAuthUserToken} from "../../models/BaseAuthUserToken";
 import {BaseAuthUser} from "../../models/BaseAuthUser";
 import {DatabaseError} from "sequelize";
 
 function generateToken(params:any): Promise<any> {
     console.log('OAuth SVC generateToken params : ', params);
     return new Promise<any>((resolve, reject) => {
-        BaseAccessToken.findOrCreate({
+        BaseAuthUserToken.findOrCreate({
             where: {
                 access_token: params.access_token
             },
@@ -54,13 +54,13 @@ function registerProfile(params:any): Promise<any> {
 function invalidToken(access_token:string): Promise<any> {
     console.log('OAuth SVC invalidToken access_token : ', access_token);
     return new Promise<any>((resolve, reject) => {
-        BaseAccessToken.findOne({
+        BaseAuthUserToken.findOne({
             where: {
                 access_token: access_token
             }
         }).then((result) => {
             console.log('OAuth SVC invalidToken findOne result : ', result);
-            return BaseAccessToken.destroy({
+            return BaseAuthUserToken.destroy({
                 where:{
                     access_token: access_token
                 }

@@ -1,7 +1,7 @@
-import {BaseAccessToken} from "../models/BaseAccessToken";
+import {BaseLocalUserToken} from "../models/BaseLocalUserToken";
 
 const create_table_bat = async () => {
-    await BaseAccessToken.sync({force:true})
+    await BaseLocalUserToken.sync({force:true})
         .then(() => {
             console.log('✅Success Create BAT TABLE');
         })

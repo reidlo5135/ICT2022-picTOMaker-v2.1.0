@@ -1,28 +1,29 @@
 import {DataTypes, Model} from "sequelize";
 import {sequelize} from "./index";
 
-
-interface BaseAuthUserAttributes {
+interface BaseLocalUserAttributes {
     id: bigint | null,
     email: string,
     name: string,
-    picture: string,
-    provider: string,
-    role: string
+    nick_name: string,
+    password: string
+    profile_image_url: string,
+    provider: string
 }
 
-export class BaseAuthUser extends Model<BaseAuthUserAttributes> {
+export class BaseLocalUser extends Model<BaseLocalUserAttributes> {
     public readonly id! : number | null;
     public email!: string;
     public name!: string;
-    public picture!: string;
+    public nick_name!: string;
+    public password!: string;
+    public profile_image_url!: string;
     public provider! : string;
-    public role!: string;
     public readonly createdAt! : Date;
     public readonly updatedAt! : Date;
 }
 
-BaseAuthUser.init({
+BaseLocalUser.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -40,21 +41,25 @@ BaseAuthUser.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    picture: {
-        type: DataTypes.STRING(255),
+    nick_name: {
+        type: DataTypes.STRING,
         allowNull: false
+    },
+    password: {
+        type:DataTypes.STRING,
+        allowNull: false,
+    },
+    profile_image_url: {
+        type: DataTypes.STRING(255),
+        allowNull: true
     },
     provider: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    role: {
-        type: DataTypes.STRING,
-        allowNull: false
     }
 }, {
-    modelName: 'BaseAuthUser',
-    tableName: 'base_auth_users',
+    modelName: 'BaseLocalUser',
+    tableName: 'base_local_users',
     sequelize,
     freezeTableName: true,
     timestamps: true,

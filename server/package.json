@@ -9,11 +9,14 @@
     "dev": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
     "build": "tsc && npm run copy-files",
     "create-db": "ts-node ./src/migration/create-db.ts",
-    "create-table-bat": "ts-node ./src/migration/create-table-bat.ts",
-    "create-table-bau": "ts-node ./src/migration/create-table-bau.ts"
+    "create-table-bau": "ts-node ./src/migration/create-table-bau.ts",
+    "create-table-baut": "ts-node src/migration/create-table-baut.ts",
+    "create-table-blu": "ts-node ./src/migration/create-table-blu.ts",
+    "create-table-blut": "ts-node ./src/migration/create-table-blut.ts"
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "concurrently": "^7.2.2",
     "cookie-parser": "~1.4.4",
@@ -23,6 +26,7 @@
     "express": "^4.18.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
