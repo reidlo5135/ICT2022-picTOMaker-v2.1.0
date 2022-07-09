@@ -6,6 +6,7 @@ import logger from 'morgan';
 import cors from 'cors';
 import bodyParser from "body-parser";
 import OAuthRouter from './routes/oauth/OAuthRouter';
+import LocalUserRouter from './routes/local/LocalUserRouter';
 
 import {sequelize} from './models';
 
@@ -20,7 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/', OAuthRouter);
+
+app.use('/v1/api/oauth2/', OAuthRouter);
+app.use('/v1/api/user/', LocalUserRouter);
 
 app.use(function(req:Request, res:Response, next:NextFunction) {
     next(createError(404));
