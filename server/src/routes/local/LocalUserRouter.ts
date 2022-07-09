@@ -4,6 +4,6 @@ const controller = require('../../controller/local/LocalUserController');
 
 router.post('/login', controller.generateToken);
 router.post('/signUp', controller.signUp);
-router.post('/profile')
+router.post('/profile', controller.getProfile);
 
 export = router;

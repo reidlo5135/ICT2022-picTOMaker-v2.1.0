@@ -33,7 +33,19 @@ const signUp = async (req:Request, res:Response, next:NextFunction) => {
     }
 }
 
+const getProfile = async (req:Request, res:Response, next:NextFunction) => {
+    const access_token = req.body.access_token;
+    console.log('LocalUserController getProfile access_token : ', access_token);
+    try {
+        const result = svc.userProfile(access_token);
+        res.send({code:0, message:'success', result});
+    } catch (e) {
+        res.send(e);
+    }
+}
+
 export = {
     generateToken,
-    signUp
+    signUp,
+    getProfile
 }

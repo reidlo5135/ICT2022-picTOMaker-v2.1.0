@@ -37,10 +37,6 @@ BaseLocalUserToken.init({
         allowNull: false,
         validate: {
             isEmail: true
-        },
-        references: {
-            model: 'base_local_user',
-            key: 'email'
         }
     },
     access_token : {
