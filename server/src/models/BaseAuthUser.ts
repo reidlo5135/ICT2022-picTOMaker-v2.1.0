@@ -1,4 +1,4 @@
-import {Sequelize, DataTypes, Model} from "sequelize";
+import {DataTypes, Model} from "sequelize";
 import {sequelize} from "./index";
 
 
@@ -59,4 +59,4 @@ BaseAuthUser.init({
     freezeTableName: true,
     timestamps: true,
     updatedAt: 'updateTimestamp'
-}) 
+});
