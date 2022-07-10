@@ -39,11 +39,7 @@ function login(params:any): Promise<any> {
                           }
                       }).then((result) => {
                           console.log('LocalUser SVC generateToken result : ', result);
-                          resolve({
-                              code: 0,
-                              message: 'success'
-                          });
-                          return result;
+                          resolve(result);
                       });
                   } else {
                       throw new Error('LocalUser SVC generateToken ERROR occurred');
@@ -74,12 +70,8 @@ function registerUser(params:any): Promise<any> {
                    provider: 'LOCAL'
                }
            }).then((result) => {
-               resolve({
-                   code: 0,
-                   message: 'success'
-               });
                console.log('LocalUser SVC registerUser result : ', result);
-               return result;
+               resolve(result);
            }).catch((e:DatabaseError) => {
                console.error('LocalUser SVC registerUser error : ', e);
                reject(e);
@@ -100,6 +92,9 @@ function userProfile(access_token:string): Promise<any> {
                 where: {
                     email: result?.email
                 }
+            }).then((result) => {
+                console.log('LocalUser SVC userProfile result : ', result);
+                resolve(result);
             });
         }).catch((e:DatabaseError) => {
             console.error('LocalUser SVC userProfile error : ', e);
