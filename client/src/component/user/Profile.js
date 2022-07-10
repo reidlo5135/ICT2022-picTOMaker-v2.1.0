@@ -39,19 +39,20 @@ const Profile = () => {
             await axios.post('/v1/api/user/profile', {
                 access_token
             }).then((response) => {
-                console.log('Local profile res data.data : ', response.data);
-                console.log('Local get profile email : ', response.data.email);
-                console.log('Local get profile nickname : ', response.data.nickname);
-                console.log('Local get profile profile_image_url : ', response.data.profile_image_url);
+                const result = response.data['result'];
+                console.log('Local profile res data : ', result);
+                console.log('Local get profile email : ', result.email);
+                console.log('Local get profile nickname : ', result.nick_name);
+                console.log('Local get profile profile_image_url : ', result.profile_image_url);
 
-                setEmail(response.data.email);
-                setNickName(response.data.nickname);
+                setEmail(result.email);
+                setNickName(result.nick_name);
 
-                if(response.data.profile_image_url === null){
+                if(result.profile_image_url === null || result.profile_image_url === ''){
                     setProfileImage(null);
                 }
 
-                localStorage.setItem("profile", JSON.stringify(response.data));
+                localStorage.setItem("profile", JSON.stringify(result));
             });
         } catch (err) {
             console.error(err);

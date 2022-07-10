@@ -16,7 +16,7 @@ export default function MyPageProfile(){
             console.log('MyPage-profile jProf : ', jsonProf);
 
             setEmail(jsonProf.email);
-            setNickName(jsonProf.nickname);
+            setNickName(jsonProf.nick_name);
             setProfileImage(jsonProf.profile_image_url);
         } catch (err) {
             console.error(err);
