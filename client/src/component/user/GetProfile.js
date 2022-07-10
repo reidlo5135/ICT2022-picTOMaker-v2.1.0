@@ -17,8 +17,8 @@ const GetProfile = () => {
             console.log('jProf : ', jsonProf);
 
             setEmail(jsonProf.email);
-            setNickName(jsonProf.nickname);
-            if(jsonProf.profile_image_url === null) {
+            setNickName(jsonProf.nick_name);
+            if(jsonProf.profile_image_url === null || jsonProf.profile_image_url === '') {
                 setProfileImage(null);
             } else {
                 setProfileImage(jsonProf.profile_image_url);
