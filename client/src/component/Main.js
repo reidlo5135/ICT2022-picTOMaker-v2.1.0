@@ -66,6 +66,8 @@ export default function Main(){
 
                     if(response.data.code === 0){
                         alert('어서오세요, ' + email + ' 픽토메이커님!');
+                        console.log('MAIN LOGIN res : ', response);
+                        console.log('MAIN LOGIN res.data : ', response.data['result']);
                         const access_token = response.data.access_token;
                         const refresh_token = response.data.refresh_token;
 
