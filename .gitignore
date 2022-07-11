@@ -4,5 +4,6 @@ client/src/component/oauth2/env.js
 server/src/config/DBConfig.ts
 server/src/config/OAuthConfig.ts
 server/src/config/JwtConfig.ts
+server/src/config/S3Config.ts
 server/src/migration/create-db.ts
 .idea/**
