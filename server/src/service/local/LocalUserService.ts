@@ -14,6 +14,10 @@ function login(params:any): Promise<any> {
                 email: params.email,
             }
         }).then((result) => {
+           if(result === null){
+               console.log('LocalUser SVC generateToken result is Null!! : ', result);
+               reject(result);
+           }
            if(result !== null) {
                bcrypt.compare(params.password, result.password, (err:Error, same:Boolean) => {
                   if(same) {
@@ -42,7 +46,8 @@ function login(params:any): Promise<any> {
                           resolve(result);
                       });
                   } else {
-                      throw new Error('LocalUser SVC generateToken ERROR occurred');
+                      console.log('LocalUser SVC generateToken ERROR result : ', JSON.stringify(result));
+                      reject(result);
                   }
                });
            }

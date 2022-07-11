@@ -15,15 +15,16 @@ const generateToken = async (req:Request, res:Response, next:NextFunction) => {
                 const refresh_token = resolve[0].refresh_token;
                 console.log('LocalUserController generateToken promise accessToken : ', access_token);
                 console.log('LocalUserController generateToken promise refreshToken : ', refresh_token);
-                res.send({'code':0, 'message': 'success', 'access_token': access_token, 'refresh_token': refresh_token});
+                res.status(200).send({'code':0, 'message': 'success', 'access_token': access_token, 'refresh_token': refresh_token});
             },
             (reject:any) => {
-                console.log(`LocalUserController generateToken promise reject : ${reject}`);
+                console.log('LocalUserController generateToken promise reject : ', JSON.stringify(reject));
                 res.send({'code':-1, 'message': 'failed', 'error': reject});
             }
         );
     } catch (e) {
-        res.send(e);
+        console.error(e);
+        res.status(500).send(e);
     }
 }
 
@@ -39,15 +40,16 @@ const signUp = async (req:Request, res:Response, next:NextFunction) => {
         svc.registerUser(params).then(
             (resolve:any) => {
                 console.log('LocalUserController signUp promise resolve : ', JSON.stringify(resolve));
-                res.send({'code':0, 'message':'success'});
+                res.status(200).send({'code':0, 'message':'success'});
             },
             (reject:any) => {
                 console.log('LocalUserController signUp promise reject : ', JSON.stringify(reject));
-                res.send({'code':-1, 'message': 'failed'})
+                res.status(500).send({'code':-1, 'message': 'failed'})
             }
         );
     } catch (e) {
-        res.send(e);
+        console.error(e);
+        res.status(500).send(e);
     }
 }
 
@@ -65,15 +67,16 @@ const getProfile = async (req:Request, res:Response, next:NextFunction) => {
                     profile_image_url: resolve[0].profile_image_url,
                     provider: resolve[0].provider
                 }
-                res.send({'code':0, 'message': 'success', 'result': result});
+                res.status(200).send({'code':0, 'message': 'success', 'result': result});
             },
             (reject:any) => {
                 console.log('LocalUserController getProfile promise reject : ', JSON.stringify(reject));
-                res.send({'code':-1, 'message': 'failed'});
+                res.status(500).send({'code':-1, 'message': 'failed'});
             }
         );
     } catch (e) {
-        res.send(e);
+        console.error(e);
+        res.status(500).send(e);
     }
 }
 

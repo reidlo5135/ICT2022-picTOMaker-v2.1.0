@@ -63,6 +63,7 @@ export default function Main(){
                     password: password
                 }).then((response) => {
                     console.log('res data ', response.data);
+                    console.log('res status ', response.status);
 
                     if(response.data.code === 0){
                         alert('어서오세요, ' + email + ' 픽토메이커님!');
@@ -78,7 +79,7 @@ export default function Main(){
 
                         closeModal();
                         history.push("/");
-                    } else {
+                    } else if(response.data.code === -1) {
                         alert('가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.');
                     }
                 });
