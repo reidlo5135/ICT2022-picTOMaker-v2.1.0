@@ -40,8 +40,16 @@ const generateToken = async (req:Request, res:Response, next:NextFunction) => {
                 expires_in,
                 provider
             };
-            svc.generateToken(bat);
-            res.send({'code': 0,'message':'success','access_token':access_token, 'refresh_token':refresh_token});
+            svc.generateToken(bat).then(
+                (resolve:any) => {
+                    console.log('OAuthController generateToken promise resolve : ', JSON.stringify(resolve));
+                    res.status(200).send({'code': 0,'message':'success','access_token':access_token, 'refresh_token':refresh_token});
+                },
+                (reject:any) => {
+                    console.log('OAuthController generateToken promise reject : ', JSON.stringify(reject));
+                    res.status(500).send({'code':-1,'message':'failed'});
+                }
+            );
         }).catch((e:AxiosError) => {
             console.error(e);
             res.send(e);
@@ -97,15 +105,23 @@ const extractProfile = async (req:Request, res:Response, next:NextFunction) => {
                 picture: profile_image_url,
                 provider
             }
-            svc.registerProfile(bau);
-            res.send({'code':0,'message': 'success', 'profile_image_url':profile_image_url,'email':email,'nickname':nickname});
+            svc.registerProfile(bau).then(
+                (resolve:any) => {
+                    console.log('OAuthController extractProfile promise resolve : ', JSON.stringify(resolve));
+                    res.status(200).send({'code':0,'message': 'success', 'profile_image_url':bau.picture,'email':bau.email,'nickname':bau.name});
+                },
+                (reject:any) => {
+                    console.log('OAuthController extractProfile promise reject : ', reject);
+                    res.status(500).send({'code':-1,'message':'failed'});
+                }
+            );
         }).catch((e:AxiosError) => {
             console.error(e);
             res.send(e);
         });
     } catch (e) {
         console.error(e);
-        res.send(e);
+        res.status(500).send(e);
     }
 };
 
@@ -113,11 +129,18 @@ const invalidToken = async (req:Request, res:Response, next:NextFunction) => {
     const access_token = req.params.access_token;
     console.log('OAuthController invalidToken access_token : ', access_token);
     try {
-        svc.invalidToken(access_token).then((result:any) => {console.log('OAuthController invalidToken result : ', JSON.stringify(result));})
-        res.send({'code':0,'message':'success'});
+        svc.invalidToken(access_token).then(
+            (resolve:any) => {
+                console.log('OAuthController invalidToken promise resolve : ', JSON.stringify(resolve));
+                res.status(200).send({'code':0,'message':'success'});
+            },
+            (reject:any) => {
+                console.log('OAuthController invalidToken promise reject : ', JSON.stringify(reject));
+                res.status(500).send({'code':-1,'message':'failed'});
+            });
     } catch (e) {
         console.error(e);
-        res.send(e);
+        res.status(500).send(e);
     }
 };
 
