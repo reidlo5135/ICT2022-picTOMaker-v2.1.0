@@ -19,7 +19,7 @@ function generateToken(params:any): Promise<any> {
             }
         }).then((result) => {
             console.log('OAuth SVC generateToken result : ', result);
-            return result;
+            resolve(result);
         }).catch((e:DatabaseError) => {
             console.error('OAuth SVC BAT generateToken error : ', e);
             reject(e);
@@ -43,7 +43,7 @@ function registerProfile(params:any): Promise<any> {
             }
         }).then((result) => {
             console.log('OAuth SVC registerProfile result : ', result);
-            return result;
+            resolve(result);
         }).catch((e:DatabaseError) => {
             console.error('OAuth SVC BAU registerProfile error : ', e);
             reject(e);
@@ -66,7 +66,7 @@ function invalidToken(access_token:string): Promise<any> {
                 }
             }).then((result) => {
                 console.log('OAuth SVC invalidToken result : ', result);
-                return result;
+                resolve(result);
             }).catch((e:DatabaseError) => {
                 console.error('OAuth SVC invalidToken destroy error : ', e);
             });
