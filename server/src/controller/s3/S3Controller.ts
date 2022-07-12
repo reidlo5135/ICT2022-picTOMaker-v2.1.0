@@ -18,7 +18,9 @@ const uploadImage = async (req:Request, res:Response, next:NextFunction) => {
         svc.decodeImage(params).then(
             (resolve) => {
                 console.log('S3Controller uploadImage promise resolve : ', JSON.stringify(resolve));
-                res.send({'code':0,'message':'success'});
+                // const image = resolve.file.location;
+                // console.log('S3Controller uploadImage file : ', image);
+                res.send({'code':0,'message':'success', 'image':resolve});
             },
             (reject) => {
 
@@ -29,6 +31,16 @@ const uploadImage = async (req:Request, res:Response, next:NextFunction) => {
     }
 }
 
+const registerS3 = async (req:Request, res:Response) => {
+    try {
+
+    } catch (e) {
+        console.error(e);
+    }
+
+}
+
 export = {
-    uploadImage
+    uploadImage,
+    registerS3
 }

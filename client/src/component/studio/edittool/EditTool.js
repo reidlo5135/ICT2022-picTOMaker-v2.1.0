@@ -142,9 +142,12 @@ export default function EditTool(props) {
                 console.log('response data : ', response.data);
 
                 if(response.data.code === 0) {
-                    localStorage.setItem("picTOUrl", response.data['picTOUrl']);
-                    alert('성공적으로 저장되었습니다!');
-                    history.push("/");
+                    const imageName = response.data['image']
+                    axios.post('/v1/api/upload/register')
+                        .then((response) => {
+                            alert('성공적으로 저장되었습니다!');
+                            history.push("/");
+                        })
                 }
             });
         } catch (err) {
