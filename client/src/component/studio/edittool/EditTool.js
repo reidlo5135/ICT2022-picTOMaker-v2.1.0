@@ -133,20 +133,13 @@ export default function EditTool(props) {
         const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
         console.log('image : ', image);
 
-        const octet = image.split(',');
-        console.log('EditTool downLoad octet 0 : ', octet[0]);
-        console.log('EditTool downLoad octet 1 : ', octet[1]);
-        const decoded = Buffer.from(octet[1], 'base64');
-        console.log('EditTool downLoad decoded : ', decoded);
-
         const jsonProf = JSON.parse(profile);
         const email = jsonProf.email;
         try {
             axios.post(`/v1/api/upload/register/${email}/${provider}`, {
-
+                image
             }).then((response) => {
                 console.log('response data : ', response.data);
-
                 if(response.data.code === 0) {
                     alert('성공적으로 저장되었습니다!');
                     history.push("/");
