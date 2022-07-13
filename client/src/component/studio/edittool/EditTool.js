@@ -140,9 +140,7 @@ export default function EditTool(props) {
                 image
             }).then((response) => {
                 console.log('response data : ', response.data);
-
                 if(response.data.code === 0) {
-                    localStorage.setItem("picTOUrl", response.data['picTOUrl']);
                     alert('성공적으로 저장되었습니다!');
                     history.push("/");
                 }
