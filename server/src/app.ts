@@ -25,7 +25,7 @@ app.use(cors());
 
 app.use('/v1/api/oauth2/', OAuthRouter);
 app.use('/v1/api/user/', LocalUserRouter);
-app.use('/v1/api/upload/', S3Router);
+app.use('/v1/api/picTO/', S3Router);
 
 app.use(function(req:Request, res:Response, next:NextFunction) {
     next(createError(404));

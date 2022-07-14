@@ -62,9 +62,26 @@ function getPicToList(email:string): Promise<any> {
             reject(e);
         });
     });
+};
+
+function getPicToCount(email:string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+        BaseS3Image.count({
+            where: {
+                email
+            }
+        }).then((result) => {
+            console.log('S3 SVC getPicToCount bS3 result : ', result);
+            resolve(result);
+        }).catch((e:DatabaseError) => {
+            console.error('S3 SVC getPicToCount bS3 Error occurred : ', e);
+            reject(e);
+        });
+    });
 }
 
 export = {
     decodeImage,
-    getPicToList
+    getPicToList,
+    getPicToCount
 }
