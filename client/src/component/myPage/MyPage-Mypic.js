@@ -22,7 +22,7 @@ export default function MyPageMyPic(){
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);
-        await axios.post(`/v1/api/upload/find/${email}`)
+        await axios.post(`/v1/api/picTO/find/${email}`)
             .then((response) => {
                 console.log('MyPage-Mypic getPicToList response : ', response.data);
                 if(response.data.code === 0) {
@@ -31,6 +31,9 @@ export default function MyPageMyPic(){
                     setLoading(false);
                 }
             })
+            .catch((e) => {
+                console.error(e);
+            });
       };
       fetchData();
     }, []);

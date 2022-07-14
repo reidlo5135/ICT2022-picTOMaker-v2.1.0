@@ -48,8 +48,28 @@ const getPicTo = async (req:Request, res:Response) => {
     }
 };
 
+const getPicToCount = async (req:Request, res:Response) => {
+    const email = req.params.email;
+    console.log('S3Controller getPicToCount email : ', email);
+    try {
+        svc.getPicToCount(email).then(
+            (resolve:any) => {
+                console.log('S3Controller getPicTo promise resolve : ', JSON.stringify(resolve));
+                res.send({'code':0, 'message':'success', 'count':resolve});
+            },
+            (reject:any) => {
+                console.error('S3Controller getPicTo promise reject : ', JSON.stringify(reject));
+                res.send({'code':-1, 'message':'failed'});
+            }
+        );
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 export = {
     uploadImage,
-    getPicTo
+    getPicTo,
+    getPicToCount
 }
 
