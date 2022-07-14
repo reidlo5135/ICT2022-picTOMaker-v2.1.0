@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from "express";
+import {Request, Response} from "express";
 const svc = require('../../service/local/LocalUserService');
 
 const generateToken = async (req:Request, res:Response) => {
