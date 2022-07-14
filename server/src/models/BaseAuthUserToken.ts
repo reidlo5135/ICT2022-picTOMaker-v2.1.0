@@ -57,7 +57,7 @@ BaseAuthUserToken.init({
     }
 }, {
     modelName: 'BaseAuthUserToken',
-    tableName: 'base_auth_tokens',
+    tableName: 'base_auth_token_ts',
     sequelize,
     freezeTableName: true,
     timestamps: true,

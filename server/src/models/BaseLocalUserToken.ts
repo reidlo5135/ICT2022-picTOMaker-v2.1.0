@@ -65,7 +65,7 @@ BaseLocalUserToken.init({
     }
 }, {
     modelName: 'BaseLocalUserToken',
-    tableName: 'base_local_tokens',
+    tableName: 'base_local_token_ts',
     sequelize,
     freezeTableName: true,
     timestamps: true,
