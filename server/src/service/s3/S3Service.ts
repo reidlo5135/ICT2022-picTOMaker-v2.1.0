@@ -1,3 +1,5 @@
+import {BaseS3Image} from "../../models/BaseS3Image";
+import {DatabaseError} from "sequelize";
 const {writeFileSync, readFileSync} = require('fs');
 const AWS = require('aws-sdk');
 const {s3Secret} = require('../../config/S3Secret');
@@ -29,11 +31,40 @@ function decodeImage(params:any): Promise<any> {
         s3.upload(s3Params, function (err:Error, data:any) {
             if(err) {throw err;}
             console.log('S3 SVC uploaded successfully : ', JSON.stringify(data));
+            BaseS3Image.create({
+                email: params.email,
+                file_name: data.key,
+                extension: '.png',
+                file_url: data.Location,
+                provider: params.provider
+            }).then((result) => {
+                console.log('S3 SVC decodeImage bS3 create result : ', result);
+                resolve(result);
+            }).catch((e:DatabaseError) => {
+                console.error('S3 SVC decodeImage bS3 create Error occurred : ', e);
+                reject(e);
+            });
         });
-        resolve(file);
+    });
+};
+
+function getPicToList(email:string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+        BaseS3Image.findAll({
+            where: {
+                email
+            }
+        }).then((result) => {
+            console.log('S3 SVC getPicToList bS3 findByEmail result : ', result);
+            resolve(result);
+        }).catch((e:DatabaseError) => {
+            console.error('S3 SVC getPicToList bS3 findByEmail Error occurred : ', e);
+            reject(e);
+        });
     });
 }
 
 export = {
-    decodeImage
+    decodeImage,
+    getPicToList
 }
