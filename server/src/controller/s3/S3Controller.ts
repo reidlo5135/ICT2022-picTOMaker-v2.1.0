@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 const svc = require('../../service/s3/S3Service');
 
-const uploadImage = async (req:Request, res:Response, next:NextFunction) => {
+const uploadImage = async (req:Request, res:Response) => {
     const image = req.body.image
     const email = req.params.email;
     const provider = req.params.provider;
