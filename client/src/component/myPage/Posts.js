@@ -7,22 +7,23 @@ const Posts = ({ posts, loading }) => {
     <>
       {
           loading && <div className='loading'>
-            <h1>잠시만 기다려주세요...</h1>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+              <h1>잠시만 기다려주세요...</h1>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
           </div>
       }
+
       <div className='mypics'>
         {posts.map((post) => (
           <div className='pic-div' key={post.id}>
                 <div className='pic-cont'>
                     <div className='pic-backimg'></div>
                     <div className='pic-img'>
-                        <img src={post} alt={"픽토이미지"} />
+                        <img src={post.file_url} alt={"픽토이미지"} />
                     </div>
-                    <p className='pic-name'>{post.id}Pickname</p>
+                    <p className='pic-name'>{post.file_name}</p>
                     <div className='pic-btns'>
                         <button className='pic-download pic-btn'>
                         </button>

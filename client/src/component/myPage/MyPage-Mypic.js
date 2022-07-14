@@ -22,22 +22,15 @@ export default function MyPageMyPic(){
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);
-        // const response = await axios.get(
-        //   "https://jsonplaceholder.typicode.com/posts"
-        // );
-
-          const response = await axios.post(`/v1/upload/get/picTO/${email}/${provider}`, {}, {
-              baseURL: 'http://localhost:8080',
-              withCredentials: true
-          }).then((response) => {
-              console.log('response data : ' + response.data);
-              console.log('response data.list : ' + response.data.list);
-
-              if(response.data.code === 0) {
-                  setPosts(response.data.list);
-                  setLoading(false);
-              }
-          });
+        await axios.post(`/v1/api/upload/find/${email}`)
+            .then((response) => {
+                console.log('MyPage-Mypic getPicToList response : ', response.data);
+                if(response.data.code === 0) {
+                    console.log('MyPage-Mypic getPictoList list : ', response.data['list']);
+                    setPosts(response.data['list']);
+                    setLoading(false);
+                }
+            })
       };
       fetchData();
     }, []);

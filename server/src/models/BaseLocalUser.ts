@@ -59,7 +59,7 @@ BaseLocalUser.init({
     }
 }, {
     modelName: 'BaseLocalUser',
-    tableName: 'base_local_users',
+    tableName: 'base_local_user_ts',
     sequelize,
     freezeTableName: true,
     timestamps: true,

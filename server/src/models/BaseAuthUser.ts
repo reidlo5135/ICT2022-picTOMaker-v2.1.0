@@ -54,7 +54,7 @@ BaseAuthUser.init({
     }
 }, {
     modelName: 'BaseAuthUser',
-    tableName: 'base_auth_users',
+    tableName: 'base_auth_user_ts',
     sequelize,
     freezeTableName: true,
     timestamps: true,
