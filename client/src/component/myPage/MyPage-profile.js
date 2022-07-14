@@ -3,8 +3,8 @@ import "../../css/MyPage.css"
 import "../../css/font.css"
 
 export default function MyPageProfile(){
-
     const getProfile = localStorage.getItem('profile');
+    const provider = localStorage.getItem('provider');
 
     const [email, setEmail] = useState();
     const [nickName, setNickName] = useState();
@@ -16,7 +16,11 @@ export default function MyPageProfile(){
             console.log('MyPage-profile jProf : ', jsonProf);
 
             setEmail(jsonProf.email);
-            setNickName(jsonProf.nick_name);
+            if(provider === 'local') {
+                setNickName(jsonProf.nick_name);
+            } else {
+                setNickName(jsonProf.nickname);
+            }
             setProfileImage(jsonProf.profile_image_url);
         } catch (err) {
             console.error(err);
