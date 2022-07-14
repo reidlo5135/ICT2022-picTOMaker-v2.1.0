@@ -4,7 +4,7 @@ const axios = require("axios");
 const env = require('../../config/OAuthConfig');
 const svc = require('../../service/oauth/OAuthService');
 
-const generateToken = async (req:Request, res:Response, next:NextFunction) => {
+const generateToken = async (req:Request, res:Response) => {
     const code = req.body.code;
     const provider = req.params.provider;
     console.log('OAuthController generateToken code : ', code);
@@ -60,7 +60,7 @@ const generateToken = async (req:Request, res:Response, next:NextFunction) => {
     }
 };
 
-const extractProfile = async (req:Request, res:Response, next:NextFunction) => {
+const extractProfile = async (req:Request, res:Response) => {
     const access_token = req.body.access_token;
     const provider = req.params.provider;
     console.log('OAuthController extractProfile access_token : ', access_token);
@@ -125,7 +125,7 @@ const extractProfile = async (req:Request, res:Response, next:NextFunction) => {
     }
 };
 
-const invalidToken = async (req:Request, res:Response, next:NextFunction) => {
+const invalidToken = async (req:Request, res:Response) => {
     const access_token = req.params.access_token;
     console.log('OAuthController invalidToken access_token : ', access_token);
     try {

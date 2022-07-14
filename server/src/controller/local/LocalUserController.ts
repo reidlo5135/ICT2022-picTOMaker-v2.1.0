@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 const svc = require('../../service/local/LocalUserService');
 
-const generateToken = async (req:Request, res:Response, next:NextFunction) => {
+const generateToken = async (req:Request, res:Response) => {
     try {
         const params = {
             email : req.body.email,
@@ -28,7 +28,7 @@ const generateToken = async (req:Request, res:Response, next:NextFunction) => {
     }
 }
 
-const signUp = async (req:Request, res:Response, next:NextFunction) => {
+const signUp = async (req:Request, res:Response) => {
     try {
         const params = {
             email: req.body.email,
@@ -53,7 +53,7 @@ const signUp = async (req:Request, res:Response, next:NextFunction) => {
     }
 }
 
-const getProfile = async (req:Request, res:Response, next:NextFunction) => {
+const getProfile = async (req:Request, res:Response) => {
     const access_token = req.body.access_token;
     console.log('LocalUserController getProfile access_token : ', access_token);
     try {
