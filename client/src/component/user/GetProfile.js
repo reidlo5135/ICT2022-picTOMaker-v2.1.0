@@ -23,7 +23,7 @@ const GetProfile = () => {
             } else {
                 setNickName(jsonProf.nickname);
             }
-            if(jsonProf.profile_image_url === null || jsonProf.profile_image_url === '') {
+            if(jsonProf.profile_image_url === null || jsonProf.profile_image_url === '' || jsonProf.profile_image_url === undefined) {
                 setProfileImage(null);
             } else {
                 setProfileImage(jsonProf.profile_image_url);
