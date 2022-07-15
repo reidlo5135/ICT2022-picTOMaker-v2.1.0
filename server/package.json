@@ -13,7 +13,8 @@
     "create-table-baut": "ts-node src/migration/create-table-baut.ts",
     "create-table-blu": "ts-node ./src/migration/create-table-blu.ts",
     "create-table-blut": "ts-node ./src/migration/create-table-blut.ts",
-    "create-table-bS3": "ts-node ./src/migration/create-table-bS3.ts"
+    "create-table-bS3": "ts-node ./src/migration/create-table-bS3.ts",
+    "create-table-bQna": "ts-node ./src/migration/create-table-bqna.ts"
   },
   "dependencies": {
     "@aws-sdk/abort-controller": "^3.110.0",
