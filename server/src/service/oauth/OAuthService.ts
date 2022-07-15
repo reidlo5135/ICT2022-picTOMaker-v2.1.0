@@ -32,7 +32,8 @@ function registerProfile(params:any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
         BaseAuthUser.findOrCreate({
             where: {
-                email: params.email
+                email: params.email,
+                provider: params.provider
             },
             defaults: {
                 email: params.email,

@@ -19,7 +19,7 @@ export default function MyPageProfile(){
 
             const email = jsonProf.email;
             setEmail(email);
-            axios.post(`/v1/api/picTO/count/${email}`)
+            axios.post(`/v1/api/picTO/count/${email}/${provider}`)
                 .then((response) => {
                     console.log('MyPage-profile getPicToCount : ', response.data);
                     if(response.data.code === 0) {

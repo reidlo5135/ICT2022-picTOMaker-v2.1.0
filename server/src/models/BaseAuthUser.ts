@@ -42,7 +42,7 @@ BaseAuthUser.init({
     },
     picture: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: true
     },
     provider: {
         type: DataTypes.STRING,
