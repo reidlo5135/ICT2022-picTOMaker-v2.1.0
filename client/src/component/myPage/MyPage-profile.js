@@ -57,7 +57,7 @@ export default function MyPageProfile(){
                         이름
                     </div>
                     <div className='MenuBox-props'>
-                        {nickName}
+                        <b>{nickName}</b>
                     </div>
                 </div>
                 <div className='MenuBox'>
@@ -65,7 +65,7 @@ export default function MyPageProfile(){
                         이메일
                     </div>
                     <div className='MenuBox-props'>
-                        {email}
+                        <b>{email}</b>
                     </div>
                 </div>
                 <div className='MenuBox'>
@@ -73,7 +73,7 @@ export default function MyPageProfile(){
                         제작한 픽토
                     </div>
                     <div className='MenuBox-props'>
-                        {count}
+                        <b>{count}</b>
                     </div>
                 </div>
             </div>
