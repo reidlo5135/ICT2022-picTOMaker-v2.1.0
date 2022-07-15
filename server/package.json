@@ -7,6 +7,7 @@
     "client": "cd ../client && npm start",
     "server": "nodemon src/app.ts",
     "dev": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
+    "heroku-postbuild": "cd ../client && npm install && npm run build",
     "build": "tsc && npm run copy-files",
     "create-db": "ts-node ./src/migration/create-db.ts",
     "create-table-bau": "ts-node ./src/migration/create-table-bau.ts",
