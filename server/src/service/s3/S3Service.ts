@@ -48,11 +48,12 @@ function decodeImage(params:any): Promise<any> {
     });
 };
 
-function getPicToList(email:string): Promise<any> {
+function getPicToList(email:string, provider:string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
         BaseS3Image.findAll({
             where: {
-                email
+                email,
+                provider
             }
         }).then((result) => {
             console.log('S3 SVC getPicToList bS3 findByEmail result : ', result);
@@ -64,11 +65,12 @@ function getPicToList(email:string): Promise<any> {
     });
 };
 
-function getPicToCount(email:string): Promise<any> {
+function getPicToCount(email:string, provider:string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
         BaseS3Image.count({
             where: {
-                email
+                email,
+                provider
             }
         }).then((result) => {
             console.log('S3 SVC getPicToCount bS3 result : ', result);
