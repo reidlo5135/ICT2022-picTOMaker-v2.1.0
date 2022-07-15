@@ -31,8 +31,8 @@ export default function MyPageProfile(){
                     console.error(e);
                 });
 
-            if(provider === 'local') {
-                setNickName(jsonProf.nick_name);
+            if(provider === 'LOCAL') {
+                setNickName(jsonProf.name);
             } else {
                 setNickName(jsonProf.nickname);
             }
