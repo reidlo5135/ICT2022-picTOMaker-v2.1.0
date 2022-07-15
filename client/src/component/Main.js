@@ -59,8 +59,8 @@ export default function Main(){
         } else {
             try {
                 axios.post('/v1/api/user/login', {
-                    email: email,
-                    password: password
+                    email,
+                    password
                 }).then((response) => {
                     console.log('res data ', response.data);
                     console.log('res status ', response.status);

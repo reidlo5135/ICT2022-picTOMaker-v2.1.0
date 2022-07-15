@@ -56,16 +56,12 @@ export default function QnA() {
 
     function onChangeIsOpen() {
         try {
-            axios.post(`/v1/qna/register/${provider}`, {
+            axios.post(`/v1/api/qna/register/${provider}`, {
                 email: profEmail,
                 name: profNickName,
-                qna: qna
-            }, {
-                baseURL: 'http://localhost:8080',
-                withCredentials: true
+                qna
             }).then((response) => {
                 console.log('response : ', response.data);
-                console.log('response : ', response.data.data);
 
                 if(response.data.code === 0) {
                     alert('문의사항이 접수되었습니다.');
