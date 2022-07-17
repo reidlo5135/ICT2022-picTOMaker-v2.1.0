@@ -18,7 +18,7 @@ export default function Community(){
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/users')
+        axios.post(`/v1/api/picTO/find/${email}`)
             .then(response => {
                 setUsers(response.data);
             });

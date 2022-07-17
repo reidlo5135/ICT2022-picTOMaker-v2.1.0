@@ -21,7 +21,7 @@ const GetProfile = () => {
             if(provider === 'local') {
                 setNickName(jsonProf.nick_name);
             } else {
-                setNickName(jsonProf.nickname);
+                setNickName(jsonProf.nick_name);
             }
             if(jsonProf.profile_image_url === null || jsonProf.profile_image_url === '') {
                 setProfileImage(null);
