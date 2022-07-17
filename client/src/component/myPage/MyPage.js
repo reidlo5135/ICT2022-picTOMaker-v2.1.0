@@ -89,7 +89,7 @@ export default function MyPageContent(){
                         <span>|</span>
                         <span>개인정보처리방침</span>
                         <span>|</span>
-                        <span>이용약관</span>
+                        <span><Link to="/terms" className='MyPage-terms'>이용약관</Link></span>
                         <p className='Copyright'>Copyright 2022. PICTO*MAKER all rights reserved</p>
                     </div>
                 </div>      
