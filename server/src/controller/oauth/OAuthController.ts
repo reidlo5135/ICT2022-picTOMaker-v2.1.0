@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from "express";
+import {Request, Response} from "express";
 import {AxiosError, AxiosResponse} from "axios";
 const axios = require("axios");
 const env = require('../../config/OAuthConfig');

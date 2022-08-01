@@ -18,12 +18,12 @@ const GetProfile = () => {
             console.log('jProf : ', jsonProf);
 
             setEmail(jsonProf.email);
-            if(provider === 'local') {
+            if(provider === 'LOCAL') {
                 setNickName(jsonProf.nick_name);
             } else {
                 setNickName(jsonProf.nick_name);
             }
-            if(jsonProf.profile_image_url === null || jsonProf.profile_image_url === '') {
+            if(jsonProf.profile_image_url === null || jsonProf.profile_image_url === '' || jsonProf.profile_image_url === undefined) {
                 setProfileImage(null);
             } else {
                 setProfileImage(jsonProf.profile_image_url);

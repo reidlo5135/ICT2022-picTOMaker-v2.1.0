@@ -19,7 +19,7 @@ export default function MyPageProfile(){
 
             const email = jsonProf.email;
             setEmail(email);
-            axios.post(`/v1/api/picTO/count/${email}`)
+            axios.post(`/v1/api/picTO/count/${email}/${provider}`)
                 .then((response) => {
                     console.log('MyPage-profile getPicToCount : ', response.data);
                     if(response.data.code === 0) {
@@ -31,8 +31,8 @@ export default function MyPageProfile(){
                     console.error(e);
                 });
 
-            if(provider === 'local') {
-                setNickName(jsonProf.nick_name);
+            if(provider === 'LOCAL') {
+                setNickName(jsonProf.name);
             } else {
                 setNickName(jsonProf.nickname);
             }
@@ -57,7 +57,7 @@ export default function MyPageProfile(){
                         이름
                     </div>
                     <div className='MenuBox-props'>
-                        {nickName}
+                        <b>{nickName}</b>
                     </div>
                 </div>
                 <div className='MenuBox'>
@@ -65,7 +65,7 @@ export default function MyPageProfile(){
                         이메일
                     </div>
                     <div className='MenuBox-props'>
-                        {email}
+                        <b>{email}</b>
                     </div>
                 </div>
                 <div className='MenuBox'>
@@ -73,7 +73,7 @@ export default function MyPageProfile(){
                         제작한 픽토
                     </div>
                     <div className='MenuBox-props'>
-                        {count}
+                        <b>{count}</b>
                     </div>
                 </div>
             </div>

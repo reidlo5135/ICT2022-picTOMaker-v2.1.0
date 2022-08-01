@@ -22,11 +22,11 @@ export default function MyPageMyPic(){
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);
-        await axios.post(`/v1/api/picTO/find/${email}`)
+        await axios.post(`/v1/api/picTO/find/${email}/${provider}`)
             .then((response) => {
                 console.log('MyPage-Mypic getPicToList response : ', response.data);
                 if(response.data.code === 0) {
-                    console.log('MyPage-Mypic getPictoList list : ', response.data['list']);
+                    console.log('MyPage-Mypic getPicToList list : ', response.data['list']);
                     setPosts(response.data['list']);
                     setLoading(false);
                 }

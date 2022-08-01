@@ -25,7 +25,13 @@ const Profile = () => {
 
                 setEmail(response.data.email);
                 setNickName(response.data.nickname);
-                setProfileImage(response.data.profile_image_url);
+
+                console.log('undefined : ', response.data.profile_image_url === undefined);
+                if(response.data.profile_image_url === null || response.data.profile_image_url === '' || response.data.profile_image_url === undefined){
+                    setProfileImage(null);
+                } else {
+                    setProfileImage(response.data.profile_image_url);
+                }
 
                 localStorage.setItem("profile", JSON.stringify(response.data));
             });
@@ -48,8 +54,11 @@ const Profile = () => {
                 setEmail(result.email);
                 setNickName(result.nick_name);
 
-                if(result.profile_image_url === null || result.profile_image_url === ''){
+                console.log('undefined : ', result.profile_image_url === undefined);
+                if(result.profile_image_url === null || result.profile_image_url === '' || result.profile_image_url === undefined){
                     setProfileImage(null);
+                } else {
+                    setProfileImage(response.data.profile_image_url);
                 }
 
                 localStorage.setItem("profile", JSON.stringify(result));

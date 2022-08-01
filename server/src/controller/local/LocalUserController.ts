@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from "express";
+import {Request, Response} from "express";
 const svc = require('../../service/local/LocalUserService');
 
 const generateToken = async (req:Request, res:Response) => {
@@ -80,8 +80,28 @@ const getProfile = async (req:Request, res:Response) => {
     }
 }
 
+const getNickName = async (req:Request, res:Response) => {
+    const email = req.body.email;
+    console.log('LocalUserController getNickName email : ', email);
+    try {
+        svc.getNickNameByEmail(email).then(
+            (resolve:any) => {
+                console.log('LocalUserController getNickName promise result : ', JSON.stringify(resolve));
+                res.send({'code':0, 'message':'success', 'nickName':resolve.nick_name});
+            },
+            (reject:any) => {
+                console.error('LocalUserController getNickName promise reject : ', JSON.stringify(reject));
+                res.send({'code':-1, 'message':'failed'});
+            }
+        );
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 export = {
     generateToken,
     signUp,
-    getProfile
+    getProfile,
+    getNickName
 }

@@ -83,7 +83,7 @@ function registerUser(params:any): Promise<any> {
            });
        });
     });
-}
+};
 
 function userProfile(access_token:string): Promise<any> {
     console.log('LocalUser SVC userProfile access_token : ', access_token);
@@ -106,10 +106,27 @@ function userProfile(access_token:string): Promise<any> {
             reject(e);
         });
     });
+};
+
+function getNickNameByEmail(email:string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+       BaseLocalUser.findOne({
+           where: {
+               email
+           }
+       }).then((result) => {
+           console.log('LocalUser SVC getNickNameByEmail result : ', result);
+           resolve(result);
+       }).catch((e:DatabaseError) => {
+           console.error('LocalUser SVC getNickNameByEmail error : ', e);
+           reject(e);
+       });
+    });
 }
 
 export = {
     login,
     registerUser,
-    userProfile
+    userProfile,
+    getNickNameByEmail
 }

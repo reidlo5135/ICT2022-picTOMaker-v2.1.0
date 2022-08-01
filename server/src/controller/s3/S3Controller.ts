@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from "express";
+import {Request, Response} from "express";
 const svc = require('../../service/s3/S3Service');
 
 const uploadImage = async (req:Request, res:Response) => {
@@ -31,9 +31,10 @@ const uploadImage = async (req:Request, res:Response) => {
 
 const getPicTo = async (req:Request, res:Response) => {
     const email = req.params.email;
+    const provider = req.params.provider;
     console.log('S3Controller getPicTo email : ', email);
     try {
-        svc.getPicToList(email).then(
+        svc.getPicToList(email, provider).then(
             (resolve:any) => {
                 console.log('S3Controller getPicTo promise resolve : ', JSON.stringify(resolve));
                 res.send({'code':0, 'message':'success', 'list':resolve});
@@ -50,9 +51,10 @@ const getPicTo = async (req:Request, res:Response) => {
 
 const getPicToCount = async (req:Request, res:Response) => {
     const email = req.params.email;
+    const provider = req.params.provider;
     console.log('S3Controller getPicToCount email : ', email);
     try {
-        svc.getPicToCount(email).then(
+        svc.getPicToCount(email, provider).then(
             (resolve:any) => {
                 console.log('S3Controller getPicTo promise resolve : ', JSON.stringify(resolve));
                 res.send({'code':0, 'message':'success', 'count':resolve});

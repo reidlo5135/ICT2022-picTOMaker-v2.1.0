@@ -8,11 +8,11 @@ import bodyParser from "body-parser";
 import OAuthRouter from './routes/oauth/OAuthRouter';
 import LocalUserRouter from './routes/local/LocalUserRouter';
 import S3Router from './routes/s3/S3Router';
-
+import QnaRouter from './routes/qna/QnaRouter';
 import {sequelize} from './models';
 
 const app: express.Application = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,6 +26,7 @@ app.use(cors());
 app.use('/v1/api/oauth2/', OAuthRouter);
 app.use('/v1/api/user/', LocalUserRouter);
 app.use('/v1/api/picTO/', S3Router);
+app.use('/v1/api/qna/', QnaRouter);
 
 app.use(function(req:Request, res:Response, next:NextFunction) {
     next(createError(404));
@@ -49,6 +50,12 @@ app.listen(port, async () => {
         .catch((e:Error) => {
             console.error(e);
         })
+});
+
+app.use(express.static(path.join(__dirname, '/client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 module.exports = app;

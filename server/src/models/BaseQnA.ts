@@ -1,28 +1,23 @@
 import {DataTypes, Model} from "sequelize";
 import {sequelize} from "./index";
 
-
-interface BaseAuthUserAttributes {
+interface BaseQnAAttributes {
     id: bigint | null,
     email: string,
     name: string,
-    picture: string,
     provider: string,
-    role: string
+    qna: string
 }
 
-export class BaseAuthUser extends Model<BaseAuthUserAttributes> {
-    public readonly id! : number | null;
+export class BaseQnA extends Model<BaseQnAAttributes> {
+    public readonly id!: number | null;
     public email!: string;
     public name!: string;
-    public picture!: string;
-    public provider! : string;
-    public role!: string;
-    public readonly createdAt! : Date;
-    public readonly updatedAt! : Date;
+    public provider!: string;
+    public qna!: string;
 }
 
-BaseAuthUser.init({
+BaseQnA.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -40,21 +35,17 @@ BaseAuthUser.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    picture: {
-        type: DataTypes.STRING(255),
-        allowNull: true
-    },
     provider: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    role: {
-        type: DataTypes.STRING,
+    qna: {
+        type: DataTypes.STRING(255),
         allowNull: false
     }
 }, {
-    modelName: 'BaseAuthUser',
-    tableName: 'base_auth_user_ts',
+    modelName: 'BaseQnA',
+    tableName: 'base_user_qna_ts',
     sequelize,
     freezeTableName: true,
     timestamps: true,
