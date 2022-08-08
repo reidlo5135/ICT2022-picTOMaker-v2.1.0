@@ -3,7 +3,7 @@
 2022-06-31 ~ <br>
 구성원: 진승범, 강준모, 김동호<br>
 <b>VERSION: 2.0.0</b><br>
-<b><a href="https://github.com/reidlo5135/ICT2022-picTOMaker-v1.1.0">-> Origin Spring Boot Version(v1.1.0)</a></b><br>
+<b><a href="https://github.com/reidlo5135/ICT2022-picTOMaker-v1.1.0">-> Original Spring Boot Version(v1.1.0)</a></b><br>
 <b><a href="https://github.com/reidlo5135/ICT2022-picTOMaker-v2.0.0/tree/dev-2.1.0">-> Node-Express.ts Version(v2.1.0)</a></b>
 
 ## **픽토메이커란?**
